@@ -1,11 +1,12 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import React from "react"
 
 import Employee from "../src/models"
 import EmployeeCard from "./employeeCard"
 import EmployeeRow from "./employeeRow";
+import LoadingIcon from "./loadingIcon"
 
 
 // export default async function EmployeeTable({employees}: {employees: Employee[]}) {
@@ -16,6 +17,17 @@ export default function EmployeeTable() {
     const [ageSort, setAgeSort] = useState(false);
     const [todayBdFilter, setTodayBdFilter] = useState(false);
     const [toggleCard, setToggleCard] = useState(false);
+    const [totalCount, setTotalCount] = useState(-1);
+
+    let dummy: Employee = {
+        "firstName": "loading...",
+        "lastName": "laoding...",
+        "profileImage": "http://somewhere.com/someimage.png",
+        "birthday": new Date(0, 0 ,0).toISOString(),
+        "ageYears": 0,
+        "nextBirthday": new Date(0, 0 ,0).toISOString(),
+        "daysToBirthday": 0,
+    };
 
     async function fetchEmployees () {
         setLoading(true);
@@ -39,8 +51,6 @@ export default function EmployeeTable() {
                     "bdToday": todayBdFilter
                 })
             });
-
-
             
             if (!response.ok) {
                 throw new Error('Api call failed')
@@ -49,6 +59,9 @@ export default function EmployeeTable() {
             const responseData: Employee[] = await response.json();
 
             setEmployees(responseData);
+            if (totalCount == -1) {
+                setTotalCount(responseData.length);
+            }
             setLoading(false);
 
         } catch(error) {
@@ -72,12 +85,10 @@ export default function EmployeeTable() {
         fetchEmployees();    
     }, [ageSort, todayBdFilter])
 
-    if (loading == true) {
-        return <p>loading ...</p>
-    }
 
     return (
-        <div className="">
+        <div className=""> 
+            { loading? <LoadingIcon></LoadingIcon>: null}
             <div className="flex flex-col items-center">
                 <h1 className="text-4xl font-bold mb-10">Employee Birthdays</h1>
                 <div className="">
@@ -90,11 +101,14 @@ export default function EmployeeTable() {
                     </button>
                 </div>
                 <div className="text-left w-full">
+                    <div className="text-center m-3">
+                        { loading? (<div>Showing 0/0 records</div>): (<div>Showing {employees.length}/{totalCount} records</div>)}
+                    </div>
                     <table className="w-full border-spacing-5 border-separate ">
                         <thead className="">
                             <tr className="border-pink-950  border-solid">
-                                <th className="">First Name</th>
-                                <th className="">Last Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Birthdate</th>
                                 <th>Age</th>
                                 <th>Next Birthday</th>
@@ -102,9 +116,10 @@ export default function EmployeeTable() {
                             </tr>
                         </thead>
                         <tbody>
-                        {employees.map((employee) => (
-                            <EmployeeRow key={employee.firstName + employee.lastName} {...employee}></EmployeeRow>
-                        ))}
+                            <Suspense fallback={<EmployeeRow {...dummy}> </EmployeeRow>}>
+                                {employees.map((employee) => (
+                                <EmployeeRow key={employee.firstName + employee.lastName} {...employee}></EmployeeRow>))}
+                            </Suspense>
                         </tbody>
                         {/* {employee && (
                             <EmployeeCard {...employee}/>
