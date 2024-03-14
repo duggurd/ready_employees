@@ -99,6 +99,7 @@ export default function EmployeeTable() {
                     <button  onClick={handleBdTodayFilter} className="p-5 m-2 min-w-60 rounded-xl shadow-sm shadow-pink-200 hover:bg-pink-950 hover:bg-opacity-40">
                         Todays Birthdays: { String(todayBdFilter) }
                     </button>
+                    
                 </div>
                 <div className="text-left w-full">
                     <div className="text-center m-3">

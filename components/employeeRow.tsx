@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Employee from "../src/models";
+import Image from "next/image";
 
 
 function titleCase(str: String): String {
@@ -25,7 +26,16 @@ export default function EmployeeRow(employee: Employee) {
 
     return (  
         <tr key={employee.firstName + employee.lastName} className=" shadow-pink-950 shadow-lg rounded-xl ">
-            <td> <b> { (employee.daysToBirthday == 0? "🎂 " :"").concat(titleCase(employee.firstName).toString()) } </b> </td>
+            <td className=""> 
+                <Image 
+                    className="absolute ml-2 rounded-full w-8 h-8 "
+                    alt="profile picture"
+                    src={employee.profileImage.toString()} 
+                    width={100} 
+                    height={100}
+                ></Image>
+                <b className="pl-14"> { (employee.daysToBirthday == 0? "🎂 " :"").concat(titleCase(employee.firstName).toString()) } </b> 
+            </td>
             <td> <b> { titleCase(employee.lastName) } </b> </td>
             <td> { new Date(employee.birthday).toLocaleDateString() } </td>
             <td> { String(employee.ageYears) } </td>
