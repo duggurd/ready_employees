@@ -1,14 +1,14 @@
 {
-    "employees": [
-        {"name": "lars gunnar helsvik", "birthday": "1971-01-02"},
-        {"name": "carl roar", "birthday": "1983-12-23"},
-        {"name": "geir tonning", "birthday": "2001-09-05"},
-        {"name": "ina splina", "birthday": "2005-06-12"},
-        {"name": "mars lonsen", "birthday": "2012-04-06"},
-        {"name": "petter sørthug", "birthday": "1978-01-01"},
-        {"name": "harald demfente", "birthday": "1987-11-26"},
-        {"name": "lisa ingersen", "birthday": "2003-09-12"},
-        {"name": "roar roarsen", "birthday": "2020-04-13"},
-        {"name": "john smith", "birthday": "1978-08-24"}
-    ]
+  "employees": [
+    { "name": "lars gunnar helsvik", "birthday": "1971-01-02" },
+    { "name": "carl roar", "birthday": "1983-12-23" },
+    { "name": "geir tonning", "birthday": "2001-09-05" },
+    { "name": "ina splina", "birthday": "2005-06-12" },
+    { "name": "mars lonsen", "birthday": "2012-04-06" },
+    { "name": "petter sørthug", "birthday": "1978-01-01" },
+    { "name": "harald demfente", "birthday": "1987-11-26" },
+    { "name": "lisa ingersen", "birthday": "2003-09-12" },
+    { "name": "roar roarsen", "birthday": "2020-04-13" },
+    { "name": "john smith", "birthday": "1978-08-24" }
+  ]
 }

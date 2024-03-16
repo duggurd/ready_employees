@@ -1,3 +1,3 @@
-export default function clsx(...args) {
-    return args.join(" ")
+export default function clsx(...args: string[]) {
+  return args.join(" ");
 }
