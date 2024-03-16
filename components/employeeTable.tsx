@@ -117,7 +117,8 @@ export default function EmployeeTable() {
               <Suspense fallback={<EmployeeRow {...dummy}> </EmployeeRow>}>
                 {employees.map((employee) => (
                   <EmployeeRow
-                    key={employee.firstName + employee.lastName}
+                    // need unique id/key here...
+                    key={`${employee.firstName}${employee.lastName}`}
                     {...employee}
                   ></EmployeeRow>
                 ))}

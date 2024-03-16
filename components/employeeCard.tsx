@@ -7,7 +7,7 @@ export default function EmployeeCard(employee: Employee) {
       <button className="border p-4 w-16 h-16 font-bold text-xl rounded-xl">
         X
       </button>
-      <p>{employee.firstName + " " + employee.lastName}</p>
+      <p>{`${employee.firstName} ${employee.lastName}`}</p>
       <p>{employee.birthday}</p>
     </div>
   ) : (
